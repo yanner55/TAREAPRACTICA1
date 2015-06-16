@@ -1,0 +1,59 @@
+create database Bliblioteca
+use Bliblioteca
+create table cliente (
+carnet int primary key not null,
+nombre varchar(15) not null,
+direccion varchar(20) not null,
+telefono varchar(10) not null,
+ limite int not null)
+ create table prestamo(
+ cod_prestamo int primary key not null)
+ create table autor(
+ cod_autor int primary key not null,
+ nombre varchar(15) not null,
+ )
+ create table tema(
+ cod_tema int primary key not null,
+ nombre varchar(15) not null)
+create table Libro(
+cod_libro int primary key not null,
+nombre varchar(50) not null,
+cod_tema int not null,
+cod_autor int not null,
+existencia int not null,
+disponible int not null,
+prestado int not null,
+reservado int not null,
+paginas int not null)
+create table detalle(
+cod_detalle int not null primary key,
+cod_prestamo int not null,
+cod_libro int not null)
+alter table prestamo add carnet int
+alter table libro add nombre varchar(15)
+
+
+alter table prestamo
+add constraint fk_carnet
+foreign key(cod_carnet) references cliente(carnet)
+
+
+alter table libro
+add constraint fk_cod_tema
+foreign key(cod_tema) references tema(cod_tema)
+
+alter table libro
+add constraint fk_cod_autor
+foreign key(cod_autor) references autor(cod_autor)
+
+alter table detalle
+add constraint fk_cod_prestamo
+foreign key(cod_prestamo) references prestamo(cod_prestamo)
+
+alter table detalle
+add constraint fk_cod_libro
+foreign key(cod_libro) references libro(cod_libro)
+
+use Bliblioteca
+insert into autor values(1,'yanner')
+insert into tema values(1,'Aventura')
